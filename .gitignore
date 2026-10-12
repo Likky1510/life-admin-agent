@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Env secrets
+backend/.env
+
+# DB
+*.db
+*.sqlite3
+
+# ChromaDB persisted data
+backend/chroma_data/
+
+# Node
+node_modules/
+frontend/dist/
+
+# OS
+.DS_Store

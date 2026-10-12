@@ -1,0 +1,182 @@
+/*
+  Design direction: a calm, organized "daily planner" feel -- this app
+  touches money (bills), deadlines, and a chatbot, so the tone should
+  reduce anxiety rather than add to it. Soft sage green as the anchor
+  (calm, growth) with warm amber reserved for due-soon/urgent signals
+  only. Generous whitespace, soft shadows, rounded corners throughout.
+*/
+
+:root {
+  --ink: #232b26;
+  --ink-soft: #5e6b61;
+  --base: #f7f8f4;
+  --surface: #ffffff;
+  --line: #e1e6dc;
+  --sage: #3f6b4f;
+  --sage-soft: #e6efe7;
+  --amber: #c4791f;
+  --amber-soft: #faedd9;
+  --rose: #b3473f;
+  --rose-soft: #f6e4e2;
+  --sky: #2f6b8f;
+  --sky-soft: #e3eef4;
+
+  --font-display: 'Lexend', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--base);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+#root { min-height: 100vh; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  color: var(--ink);
+}
+
+.layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 225px;
+  background: var(--sage);
+  color: #e9f1ea;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .brand { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+.sidebar .brand-sub { font-size: 0.72rem; color: #c3dac8; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 30px; }
+
+.sidebar nav { display: flex; flex-direction: column; gap: 4px; }
+.sidebar nav a {
+  color: #dcecdd;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  transition: background 0.15s ease;
+}
+.sidebar nav a:hover, .sidebar nav a.active { background: rgba(255,255,255,0.13); color: #ffffff; }
+
+.sidebar .user-tag {
+  margin-top: auto; padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  font-size: 0.8rem; color: #c3dac8;
+}
+
+.main { flex: 1; padding: 36px 44px; max-width: 1100px; }
+
+.page-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 26px; }
+.page-header .eyebrow { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--sage); font-weight: 600; margin-bottom: 4px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 4px rgba(35,43,38,0.04);
+}
+
+.grid { display: grid; gap: 14px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.stat-card .stat-value { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--sage); }
+.stat-card .stat-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); }
+
+.btn {
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+  border: none; background: var(--sage); color: white;
+  padding: 10px 18px; border-radius: 10px; cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.btn:hover { opacity: 0.9; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary { background: var(--sage-soft); color: var(--sage); }
+.btn-danger { background: var(--rose-soft); color: var(--rose); }
+.btn-small { padding: 6px 12px; font-size: 0.8rem; }
+
+input, textarea, select {
+  font-family: var(--font-body); font-size: 0.93rem;
+  border: 1.5px solid var(--line); border-radius: 9px;
+  padding: 9px 12px; background: var(--surface); color: var(--ink); width: 100%;
+}
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--sage); }
+
+label { font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); display: block; margin-bottom: 6px; }
+.field { margin-bottom: 16px; }
+
+.badge {
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+  padding: 4px 10px; border-radius: 20px; display: inline-block;
+}
+.badge-task { background: var(--sky-soft); color: var(--sky); }
+.badge-bill { background: var(--amber-soft); color: var(--amber); }
+.badge-subscription { background: var(--sage-soft); color: var(--sage); }
+.badge-appointment { background: var(--rose-soft); color: var(--rose); }
+.badge-document { background: #ece7f5; color: #5c3f9e; }
+
+.badge-overdue { background: var(--rose-soft); color: var(--rose); }
+.badge-soon { background: var(--amber-soft); color: var(--amber); }
+
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); padding: 10px; border-bottom: 1.5px solid var(--line); }
+td { padding: 12px 10px; border-bottom: 1px solid var(--line); font-size: 0.9rem; }
+tr:hover td { background: var(--base); }
+
+.error-text { color: var(--rose); font-size: 0.85rem; margin-top: 6px; }
+.helper-text { color: var(--ink-soft); font-size: 0.84rem; margin-top: 4px; }
+
+.login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--sage); }
+.login-card { background: var(--base); width: 400px; padding: 40px 36px; border-radius: 22px; }
+.login-card h1 { font-size: 1.5rem; margin-bottom: 2px; }
+.login-card .sub { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 26px; }
+
+.empty-state { text-align: center; padding: 56px 20px; color: var(--ink-soft); }
+
+.life-item-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
+}
+.life-item-row:last-child { border-bottom: none; }
+
+.checkbox-circle {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--line); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.15s ease;
+}
+.checkbox-circle.checked { background: var(--sage); border-color: var(--sage); color: white; }
+
+.chat-bubble {
+  border-radius: 16px; padding: 12px 16px; margin-bottom: 10px;
+  max-width: 78%; font-size: 0.91rem; line-height: 1.5;
+}
+.chat-bubble.user { background: var(--sage); color: white; margin-left: auto; }
+.chat-bubble.assistant { background: var(--sage-soft); color: var(--ink); margin-right: auto; }
+
+.chat-window {
+  height: 420px; overflow-y: auto; display: flex; flex-direction: column;
+  padding: 8px 4px; margin-bottom: 16px;
+}
+
+.relevance-pill { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--sage); }
+
+.skill-tag {
+  display: inline-block; background: var(--sage-soft); color: var(--sage);
+  font-size: 0.78rem; font-weight: 600; padding: 4px 11px; border-radius: 20px; margin: 3px 4px 3px 0;
+}
